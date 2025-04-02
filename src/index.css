@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply antialiased bg-[#1a1a1a] text-amber-100;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-[#242424];
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-amber-700/50 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-amber-600/50;
+}
+
 .leaflet-container {
   border-radius: 0.5rem;
 }

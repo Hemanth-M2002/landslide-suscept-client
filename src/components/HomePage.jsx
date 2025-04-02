@@ -33,29 +33,29 @@ function HomePage() {
         <div className="container flex h-16 items-center justify-between max-w-7xl mx-auto px-4">
           <div className="flex items-center gap-2 font-bold text-stone-50">
             <Layers className="h-6 w-6 text-amber-500" />
-            <span>Landslide Susceptibility</span>
+            <span>ALSA</span>
           </div>
           <nav className="hidden md:flex gap-6">
             <Link
-              to="#features"
+              to="/soon"
               className="text-sm font-medium hover:text-amber-400 transition-colors"
             >
               Features
             </Link>
             <Link
-              to="#about"
+              to="/soon"
               className="text-sm font-medium hover:text-amber-400 transition-colors"
             >
               About
             </Link>
             <Link
-              to="#research"
+              to="/soon"
               className="text-sm font-medium hover:text-amber-400 transition-colors"
             >
               Research
             </Link>
             <Link
-              to="#contact"
+              to="/team"
               className="text-sm font-medium hover:text-amber-400 transition-colors"
             >
               Contact
@@ -82,7 +82,7 @@ function HomePage() {
         <div className="container relative z-20 flex flex-col items-center text-center gap-6 py-24 max-w-7xl mx-auto px-4">
           <div className="space-y-4 max-w-3xl">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-amber-500">
-              Predicting Earth's Movements
+            Advanced Landslide Susceptibility Analysis Using Hybrid Deep Learning Models
             </h1>
             <p className="mx-auto max-w-[700px] text-stone-300 md:text-xl">
               Advanced landslide susceptibility mapping and analysis to protect communities and infrastructure
