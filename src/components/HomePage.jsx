@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"; // Removed Suspense since we'll manage loading manually
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight, Info, Layers, MapPin, Menu } from "lucide-react";
 import EarthVisualization from "./EarthVisualization";
@@ -49,7 +49,7 @@ function HomePage() {
               About
             </Link>
             <Link
-              to="/soon"
+              to="/research"
               className="text-sm font-medium hover:text-amber-400 transition-colors"
             >
               Research

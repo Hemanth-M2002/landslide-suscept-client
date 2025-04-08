@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { LatLngBounds } from 'leaflet';
 import React from 'react';
-import { Map, BarChart3, Settings } from 'lucide-react';
+import { Map, BarChart3, Settings, AlertTriangle } from 'lucide-react';
 import Header from './Header';
 import MapView from './MapView';
 import AnalyticsView from './AnalyticsView';
@@ -106,13 +106,13 @@ const regions = {
 const getRiskColor = (risk) => {
   switch (risk) {
     case 'high':
-      return '#ef4444'; // Red
+      return '#dc2626';
     case 'medium':
-      return '#f97316'; // Orange
+      return '#ea580c';
     case 'low':
-      return '#22c55e'; // Green
+      return '#16a34a';
     default:
-      return '#gray';
+      return '#6b7280';
   }
 };
 
@@ -124,6 +124,7 @@ export default function HomeMap() {
   ]);
 
   const currentRegion = regions[selectedRegion];
+
   const initialBounds = React.useMemo(() => {
     const bounds = new LatLngBounds();
     Object.values(regions).forEach((region) => {
@@ -148,16 +149,16 @@ export default function HomeMap() {
         label: 'Risk Factors',
         data: Object.values(currentRegion.riskScores.factors),
         backgroundColor: [
-          'rgba(54, 162, 235, 0.6)', // Blue
-          'rgba(255, 99, 132, 0.6)', // Red
-          'rgba(75, 192, 192, 0.6)', // Green
-          'rgba(255, 159, 64, 0.6)', // Orange
+          'rgba(99, 102, 241, 0.6)',
+          'rgba(239, 68, 68, 0.6)',
+          'rgba(34, 197, 94, 0.6)',
+          'rgba(249, 115, 22, 0.6)',
         ],
         borderColor: [
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 99, 132, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(255, 159, 64, 1)',
+          'rgba(99, 102, 241, 1)',
+          'rgba(239, 68, 68, 1)',
+          'rgba(34, 197, 94, 1)',
+          'rgba(249, 115, 22, 1)',
         ],
         borderWidth: 1,
       },
@@ -170,96 +171,113 @@ export default function HomeMap() {
       {
         label: 'Risk Score Trend',
         data: currentRegion.riskScores.historical,
-        borderColor: 'rgb(75, 192, 192)', // Green
+        borderColor: 'rgb(99, 102, 241)',
+        backgroundColor: 'rgba(99, 102, 241, 0.1)',
         tension: 0.1,
-        fill: false,
+        fill: true,
       },
     ],
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-slate-100">
       <Header generateNewAnalysis={generateNewAnalysis} />
 
       <main className="max-w-7xl mx-auto px-4 py-6">
-        <div className="bg-white rounded-lg shadow">
-          <div className="border-b border-gray-200">
-            <nav className="flex -mb-px">
-              <button
-                onClick={() => setActiveTab('map')}
-                className={`px-6 py-4 flex items-center space-x-2 ${
-                  activeTab === 'map'
-                    ? 'border-b-2 border-blue-500 text-blue-600'
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                <Map size={20} />
-                <span>Landslide Risk Map</span>
-              </button>
-              <button
-                onClick={() => setActiveTab('analytics')}
-                className={`px-6 py-4 flex items-center space-x-2 ${
-                  activeTab === 'analytics'
-                    ? 'border-b-2 border-blue-500 text-blue-600'
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                <BarChart3 size={20} />
-                <span>Landslide Analytics</span>
-              </button>
-              <button
-                onClick={() => setActiveTab('settings')}
-                className={`px-6 py-4 flex items-center space-x-2 ${
-                  activeTab === 'settings'
-                    ? 'border-b-2 border-blue-500 text-blue-600'
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                <Settings size={20} />
-                <span>Settings</span>
-              </button>
+        <div className="bg-white rounded-xl shadow-lg border border-slate-200">
+          <div className="bg-slate-50 rounded-t-xl border-b border-slate-200">
+            <nav className="flex px-4">
+              {[
+                { id: 'map', icon: Map, label: 'Risk Map' },
+                { id: 'analytics', icon: BarChart3, label: 'Analytics' },
+                { id: 'settings', icon: Settings, label: 'Settings' }
+              ].map(({ id, icon: Icon, label }) => (
+                <button
+                  key={id}
+                  onClick={() => setActiveTab(id)}
+                  className={`px-6 py-4 flex items-center space-x-2 transition-all duration-200 ${
+                    activeTab === id
+                      ? 'border-b-2 border-indigo-600 text-indigo-600 bg-white'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  }`}
+                >
+                  <Icon size={18} />
+                  <span className="font-medium">{label}</span>
+                </button>
+              ))}
             </nav>
           </div>
 
-          <div className="p-4 border-b border-gray-200">
-            <div className="w-64">
-              <label htmlFor="region" className="block text-sm font-medium text-gray-700 mb-2">
-                Select Region
-              </label>
-              <select
-                id="region"
-                value={selectedRegion}
-                onChange={(e) => setSelectedRegion(e.target.value)}
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              >
-                {Object.entries(regions).map(([key, region]) => (
-                  <option key={key} value={key}>
-                    {region.name}
-                  </option>
-                ))}
-              </select>
+          <div className="p-6 bg-white border-b border-slate-200">
+            <div className="flex items-center space-x-4">
+              <div className="w-64">
+                <label htmlFor="region" className="block text-sm font-semibold text-slate-700 mb-2">
+                  Select Region
+                </label>
+                <select
+                  id="region"
+                  value={selectedRegion}
+                  onChange={(e) => setSelectedRegion(e.target.value)}
+                  className="w-full text-black rounded-lg border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 transition-all duration-200"
+                >
+                  {Object.entries(regions).map(([key, region]) => (
+                    <option key={key} value={key}>
+                      {region.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              
+              <div className="flex items-center space-x-2 px-4 py-2 bg-slate-50 rounded-lg">
+                <AlertTriangle className="text-amber-500" size={20} />
+                <span className="text-sm font-medium text-slate-700">
+                  Current Risk Level: {currentRegion.riskScores.current}%
+                </span>
+              </div>
             </div>
           </div>
 
           <div className="p-6">
             {activeTab === 'map' && (
-              <MapView
-                regions={regions}
-                selectedRegion={selectedRegion}
-                analyses={analyses}
-                initialBounds={initialBounds}
-                getRiskColor={getRiskColor}
-              />
+              <div className="rounded-lg overflow-hidden border border-slate-200 shadow-inner">
+                <MapView
+                  regions={regions}
+                  selectedRegion={selectedRegion}
+                  analyses={analyses}
+                  initialBounds={initialBounds}
+                  getRiskColor={getRiskColor}
+                />
+              </div>
             )}
             {activeTab === 'analytics' && (
-              <AnalyticsView
-                currentRegion={currentRegion}
-                riskFactorsData={riskFactorsData}
-                historicalData={historicalData}
-              />
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h3 className="text-lg font-semibold text-slate-900 mb-4">Risk Factors Analysis</h3>
+                    <AnalyticsView
+                      currentRegion={currentRegion}
+                      riskFactorsData={riskFactorsData}
+                      historicalData={historicalData}
+                      textClassName="text-slate-900"
+                    />
+                  </div>
+                  <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <h3 className="text-lg font-semibold text-slate-900 mb-4">Historical Trend</h3>
+                    <AnalyticsView
+                      currentRegion={currentRegion}
+                      riskFactorsData={riskFactorsData}
+                      historicalData={historicalData}
+                      textClassName="text-slate-900"
+                    />
+                  </div>
+                </div>
+              </div>
             )}
             {activeTab === 'settings' && (
-              <div>Settings content goes here</div>
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                <h3 className="text-lg font-semibold text-slate-900 mb-4">Settings</h3>
+                <p className="text-slate-600">Configure your preferences and notification settings here.</p>
+              </div>
             )}
           </div>
         </div>
