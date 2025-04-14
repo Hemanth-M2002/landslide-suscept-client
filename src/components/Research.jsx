@@ -31,6 +31,81 @@ const pageVariants = {
 
 export default function Research() {
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [showAllReferences, setShowAllReferences] = useState(false);
+
+  // Define references array
+  const references = [
+    {
+      citation: "1. Wang, Z., Liu, Q., & Liu, Y. (2020). Mapping Landslide Susceptibility Using Machine Learning Algorithms and GIS: A Case Study in Shexian County, Anhui Province, China. Symmetry, 12(12), 1954.",
+      url: "https://doi.org/10.3390/sym12121954"
+    },
+    {
+      citation: "2. Marjanović, M., Kovačević, M., Bajat, B., & Voženílek, V. (2011). Landslide susceptibility assessment using SVM machine learning algorithm. Engineering Geology, 123(3), 225–234.",
+      url: "https://doi.org/10.1016/j.enggeo.2011.09.006"
+    },
+    {
+      citation: "3. Zêzere, J. L., Pereira, S., Melo, R., Oliveira, S. C., & Garcia, R. A. C. (2017). Mapping landslide susceptibility using data-driven methods. Science of The Total Environment, 589, 250–267.",
+      url: "https://doi.org/10.1016/j.scitotenv.2017.02.188"
+    },
+    {
+      citation: "4. Hong, H., Shahabi, H., Shirzadi, A., et al. (2019). Landslide susceptibility assessment at the Wuning area, China: A comparison between multi-criteria decision making, bivariate statistical, and machine learning methods. Natural Hazards, 96, 173–212.",
+      url: "https://doi.org/10.1007/s11069-018-3536-0"
+    },
+    {
+      citation: "5. Chen, W., Pourghasemi, H. R., & Zhao, Z. (2016). A GIS-based comparative study of Dempster-Shafer, logistic regression, and artificial neural network models for landslide susceptibility mapping. Geocarto International, 32(4), 367–385.",
+      url: "https://doi.org/10.1080/10106049.2016.1140824"
+    },
+    {
+      citation: "6. Wang, Y., Fang, Z., & Hong, H. (2019). Comparison of convolutional neural networks for landslide susceptibility mapping in Yanshan County, China. Science of The Total Environment, 666, 975–993.",
+      url: "https://doi.org/10.1016/j.scitotenv.2019.02.263"
+    },
+    {
+      citation: "7. Hakim, W. L., Rezaie, F., Nur, A. S., Panahi, M., Khosravi, K., Lee, C. W., & Lee, S. (2022). Convolutional neural network (CNN) with metaheuristic optimization algorithms for landslide susceptibility mapping in Icheon, South Korea. Journal of environmental management, 305, 114367.",
+      url: "https://doi.org/10.1016/j.jenvman.2021.114367"
+    },
+    {
+      citation: "8. Zhang, H. K., Qiu, S., Suh, J. W., Luo, D., & Zhu, Z. (2024). Machine learning and deep learning in remote sensing data analysis. Reference Module in Earth Systems and Environmental Sciences.",
+      url: "https://doi.org/10.1016/B978-0-443-13220-9.00008-1"
+    },
+    {
+      citation: "9. Yi, Y., Zhang, Z., Zhang, W., Jia, H., & Zhang, J. (2020). Landslide susceptibility mapping using multiscale sampling strategy and convolutional neural network: A case study in Jiuzhaigou region. CATENA, 195, Article 104851.",
+      url: "https://doi.org/10.1016/j.catena.2020.104851"
+    },
+    {
+      citation: "10. Zhang, T., Li, Y., Wang, T., et al. (2023). Correction: Evaluation of different machine learning models and novel deep learning-based algorithm for landslide susceptibility mapping. Geoscience Letters, 10(44).",
+      url: "https://doi.org/10.1186/s40562-023-00296-5"
+    },
+    {
+      citation: "11. Neteler, M., & Mitasova, H. (2002). Working with raster data. In Open source GIS (Vol. 689, pp. 143–172). Springer, Boston, MA.",
+      url: "https://doi.org/10.1007/978-1-4757-3578-9_5"
+    },
+    {
+      citation: "12. Kim, M., et al. (2018). Convolutional neural network-based land cover classification using 2-D spectral reflectance curve graphs with multitemporal satellite imagery. IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, 11(12), 4604–4617.",
+      url: "https://doi.org/10.1109/JSTARS.2018.2880783"
+    },
+    {
+      citation: "13. Azarafza, M., Azarafza, M., Akgün, H., Atkinson, P. M., & Derakhshani, R. (2021). Deep learning-based landslide susceptibility mapping. Scientific Reports, 11(1), 24112.",
+      url: "https://doi.org/10.1038/s41598-021-03585-1"
+    },
+    {
+      citation: "14. González, A. (2003). Validation of landslide susceptibility maps: Examples and applications from a case study in northern Spain. Natural Hazards, 105, 14-25.",
+      url: ""
+    },
+    {
+      citation: "15. Fleuchaus, P., Blum, P., Wilde, M., Terhorst, B., & Butscher, C. (2021). Retrospective evaluation of landslide susceptibility maps and review of validation practice. Environmental Earth Sciences, 80(15), 485.",
+      url: "https://doi.org/10.1007/s12665-021-09770-9"
+    },
+    {
+      citation: "16. van Westen, C.J., Rengers, N. & Soeters, R. Use of Geomorphological Information in Indirect Landslide Susceptibility Assessment. Natural Hazards 30, 399–419 (2003).",
+      url: "https://doi.org/10.1023/B:NHAZ.0000007097.42735.9e"
+    },
+    {
+      citation: "17. Taalab, K., Cheng, T., & Zhang, Y. (2018). Mapping landslide susceptibility and types using Random Forest. Big Earth Data, 2(2), 159–178.",
+      url: "https://doi.org/10.1080/20964471.2018.1472392"
+    }
+  ];
+
+  const referencesToShow = showAllReferences ? references : references.slice(0, 5);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,7 +130,6 @@ export default function Research() {
         exit="exit"
         className="min-h-screen bg-[#1a1a1a]"
       >
-        {/* Rest of the component remains the same */}
         {/* Hero Section */}
         <motion.div 
           initial={{ opacity: 0 }}
@@ -167,28 +241,52 @@ export default function Research() {
               References
             </h2>
             <div className="space-y-4">
-              {[
-                "[1] Wang, Z., Liu, Q., & Liu, Y. (2020). Mapping Landslide Susceptibility Using Machine Learning Algorithms and GIS: A Case Study in Shexian County, Anhui Province, China. Symmetry, 12(12), 1954.",
-                "[2] Marjanović, M., Kovačević, M., Bajat, B., & Voženílek, V. (2011). Landslide susceptibility assessment using SVM machine learning algorithm. Engineering Geology, 123(3), 225–234.",
-                "[3] Zêzere, J. L., Pereira, S., Melo, R., Oliveira, S. C., & Garcia, R. A. C. (2017). Mapping landslide susceptibility using data-driven methods. Science of The Total Environment, 589, 250–267.",
-              ].map((ref, index) => (
-                <motion.div 
-                  key={index}
-                  whileHover={{ scale: 1.01 }}
-                  className="p-5 bg-[#1a1a1a] rounded-lg hover:bg-[#2a2a2a] transition-all cursor-pointer border border-amber-900/20"
-                >
-                  <div className="flex justify-between items-start gap-4">
-                    <p className="text-amber-100/90">{ref}</p>
-                    <Download className="h-5 w-5 text-amber-500 flex-shrink-0" />
-                  </div>
-                </motion.div>
-              ))}
+              <AnimatePresence>
+                {referencesToShow.map((ref, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    whileHover={{ scale: 1.01 }}
+                    className="p-5 bg-[#1a1a1a] rounded-lg hover:bg-[#2a2a2a] transition-all border border-amber-900/20"
+                  >
+                    <div className="flex justify-between items-start gap-4">
+                      <p className="text-amber-100/90">{ref.citation}</p>
+                      <div className="flex gap-2">
+                        {ref.url && (
+                          <button 
+                            onClick={() => window.open(ref.url, '_blank')}
+                            className="text-amber-500 hover:text-amber-400 transition-colors"
+                            title="View online"
+                          >
+                            <ExternalLink className="h-5 w-5" />
+                          </button>
+                        )}
+                        <button 
+                          onClick={() => console.log('Downloading:', ref.citation)}
+                          className="text-amber-500 hover:text-amber-400 transition-colors"
+                          title="Download"
+                        >
+                          <Download className="h-5 w-5" />
+                        </button>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+
               <motion.button 
                 whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setShowAllReferences(!showAllReferences)}
                 className="mt-6 w-full bg-[#1a1a1a] hover:bg-[#2a2a2a] text-amber-500 font-semibold py-4 rounded-lg transition-colors flex items-center justify-center gap-2 border border-amber-900/20"
               >
-                <span>View All References</span>
-                <Map className="h-4 w-4" />
+                <span>{showAllReferences ? 'Show Less References' : 'View All References'}</span>
+                <ChevronRight 
+                  className={`h-4 w-4 transition-transform ${showAllReferences ? 'rotate-90' : ''}`}
+                />
               </motion.button>
             </div>
           </motion.div>
