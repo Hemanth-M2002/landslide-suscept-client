@@ -37,7 +37,7 @@ function HomePage() {
 
   const handleNavigate = () => {
     if (isEarthLoaded) {
-      navigate("/home");
+      navigate("/map-view");
     } else {
       console.log("Waiting for Earth to load...");
       alert("Please wait for the Earth visualization to load before exploring the map.");
@@ -64,7 +64,7 @@ function HomePage() {
           </div>
           <nav className="hidden md:flex gap-6">
             <Link
-              to="/soon"
+              to="/feature-page"
               className="text-sm font-medium hover:text-amber-400 transition-colors"
             >
               Features
