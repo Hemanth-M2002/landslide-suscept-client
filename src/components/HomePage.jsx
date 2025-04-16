@@ -6,17 +6,15 @@ import FeatureCard from "./FeatureCard";
 
 function HomePage() {
   const navigate = useNavigate();
-  const [isEarthLoaded, setIsEarthLoaded] = useState(false); // Track loading state
-  const [stars, setStars] = useState([]); // State to store star positions
+  const [isEarthLoaded, setIsEarthLoaded] = useState(false);
+  const [stars, setStars] = useState([]);
 
-  // Generate random stars for the background
   useEffect(() => {
     const generateStars = () => {
       const newStars = [];
-      const starCount = Math.floor(Math.random() * 50) + 100; // Random number of stars between 100-150
-      
+      const starCount = 150; // Fixed number of stars for consistency
+
       for (let i = 0; i < starCount; i++) {
-        // Enhanced star properties with more variation
         newStars.push({
           id: i,
           left: `${Math.random() * 100}%`,
@@ -28,12 +26,12 @@ function HomePage() {
           opacity: Math.random() * 0.5 + 0.3,
         });
       }
-      
+
       setStars(newStars);
     };
-    
+
     generateStars();
-  }, []); // Run once on component mount
+  }, []);
 
   const handleNavigate = () => {
     if (isEarthLoaded) {
@@ -44,11 +42,9 @@ function HomePage() {
     }
   };
 
-  // Force initialization and re-render on mount
   useEffect(() => {
-    // Trigger an immediate state update to ensure the component tree renders fully
     const timer = setTimeout(() => {
-      setIsEarthLoaded(false); // Reset to false to ensure loading state is re-evaluated
+      setIsEarthLoaded(false);
     }, 0);
     return () => clearTimeout(timer);
   }, []);
@@ -97,7 +93,6 @@ function HomePage() {
       {/* Hero Section with 3D Earth */}
       <section className="relative flex flex-1 flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-10">
-          {/* Removed Suspense, manually handling loading state */}
           <EarthVisualization onLoaded={() => setIsEarthLoaded(true)} />
           {!isEarthLoaded && (
             <div className="h-full w-full flex items-center justify-center text-stone-300">
@@ -109,11 +104,10 @@ function HomePage() {
         <div className="container relative z-20 flex flex-col items-center text-center gap-6 py-24 max-w-7xl mx-auto px-4">
           <div className="space-y-4 max-w-3xl">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-amber-500">
-            Advanced Landslide Susceptibility Analysis Using Hybrid Deep Learning Models
+              Advanced Landslide Susceptibility Analysis Using Hybrid Deep Learning Models
             </h1>
             <p className="mx-auto max-w-[700px] text-stone-300 md:text-xl">
-              Advanced landslide susceptibility mapping and analysis to protect communities and infrastructure
-              worldwide.
+              Advanced landslide susceptibility mapping and analysis to protect communities and infrastructure worldwide.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
@@ -122,7 +116,7 @@ function HomePage() {
               className={`bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded flex items-center ${
                 !isEarthLoaded ? "opacity-50 cursor-not-allowed" : ""
               }`}
-              disabled={!isEarthLoaded} // Disable button until loaded
+              disabled={!isEarthLoaded}
             >
               Explore Map
               <ChevronRight className="ml-2 h-4 w-4" />
@@ -195,8 +189,7 @@ function HomePage() {
                 Advanced Landslide Analysis
               </h2>
               <p className="mt-4 text-stone-400 max-w-2xl mx-auto">
-                Our platform combines geological data, machine learning, and real-time monitoring to predict landslide
-                susceptibility.
+                Our platform combines geological data, machine learning, and real-time monitoring to predict landslide susceptibility.
               </p>
             </div>
 
@@ -205,16 +198,19 @@ function HomePage() {
                 icon={<Layers className="h-10 w-10 text-amber-500" />}
                 title="Geological Mapping"
                 description="Multi-layered geological data analysis with advanced terrain modeling and soil composition assessment."
+                className="hover:bg-stone-800 hover:shadow-lg hover:shadow-amber-500/50 cursor-pointer transition-transform duration-300 transform hover:scale-105"
               />
               <FeatureCard
                 icon={<MapPin className="h-10 w-10 text-amber-500" />}
                 title="Risk Assessment"
                 description="Identify high-risk zones with precision using our proprietary risk assessment algorithms."
+                className="hover:bg-stone-800 hover:shadow-lg hover:shadow-amber-500/50 cursor-pointer transition-transform duration-300 transform hover:scale-105"
               />
               <FeatureCard
                 icon={<Info className="h-10 w-10 text-amber-500" />}
                 title="Real-time Monitoring"
                 description="Continuous monitoring of soil conditions, rainfall, and ground movement with early warning systems."
+                className="hover:bg-stone-800 hover:shadow-lg hover:shadow-amber-500/50 cursor-pointer transition-transform duration-300 transform hover:scale-105"
               />
             </div>
           </div>

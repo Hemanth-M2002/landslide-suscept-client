@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Mail, Github, Linkedin, MapPin, Brain, Code, Database, ChevronLeft } from 'lucide-react';
+import { GraduationCap, Mail, Github, Linkedin, Briefcase, Brain, Code, Database, ChevronLeft } from 'lucide-react';
 import { Button, Container, Grid, Typography, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -19,49 +19,49 @@ import { Link } from 'react-router-dom';
 
 const teamMembers = [
   {
-    name: 'Alex Thompson',
-    role: 'GIS Specialist & Team Lead',
-    image: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&q=80',
-    department: 'Geoinformatics Engineering',
-    skills: ['GIS Analysis', 'Remote Sensing', 'Python', 'Machine Learning'],
-    social: {
-      email: 'alex.t@university.edu',
-      github: '#',
-      linkedin: '#'
-    }
-  },
-  {
-    name: 'Sarah Chen',
-    role: 'Full Stack Developer',
+    name: 'Kaarnika A',
+    role: 'Team Lead & ARCGis Analyst',
     image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80',
-    department: 'Computer Science Engineering',
-    skills: ['React', 'Node.js', 'PostgreSQL', 'TypeScript'],
+    department: 'Computer Science and Business Systems',
+    skills: ['ArcGIS Analysis', 'Feature Engineering', 'Python', 'Machine Learning'],
     social: {
-      email: 'sarah.c@university.edu',
+      email: 'kaarnika.a2021@sece.ac.in',
       github: '#',
       linkedin: '#'
     }
   },
   {
-    name: 'Michael Rodriguez',
-    role: 'Data Scientist',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80',
-    department: 'Data Science',
-    skills: ['Machine Learning', 'Python', 'Data Analysis', 'TensorFlow'],
-    social: {
-      email: 'michael.r@university.edu',
-      github: '#',
-      linkedin: '#'
-    }
-  },
-  {
-    name: 'Emily Zhang',
-    role: 'UI/UX Designer',
+    name: 'Srinidhi B',
+    role: 'Full Stack Developer , ARCGIS Developer',
     image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80',
-    department: 'Computer Science Engineering',
-    skills: ['UI Design', 'Figma', 'User Research', 'Prototyping'],
+    department: 'Computer Science and Business Systems',
+    skills: ['React', 'Node.js', 'JavaScript', 'ArcGIS','GeoSpatical Data Analysis'],
     social: {
-      email: 'emily.z@university.edu',
+      email: 'srinidhi.b2021@sece.ac.in',
+      github: '#',
+      linkedin: '#'
+    }
+  },
+  {
+    name: 'Balaji S',
+    role: 'Full Stack Developer',
+    image:'https://img.freepik.com/free-photo/indoor-picture-cheerful-handsome-young-man-having-folded-hands-looking-directly-smiling-sincerely-wearing-casual-clothes_176532-10257.jpg?t=st=1744761186~exp=1744764786~hmac=0a68fabf4de62f52089ea4cb9fc012d914a3bb1ef5638410491b3ff6a9f0ce29&w=1380',
+    department: 'Computer Science and Business Systems',
+    skills: ['React','Node js','JavaScript','MongoDB','Postman'],
+    social: {
+      email: 'balaji.s2021csbs@sece.ac.in',
+      github: '#',
+      linkedin: '#'
+    }
+  },
+  {
+    name: 'Hemanth M',
+    role: 'Full Stack Developer',
+    image: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&q=80',
+    department: 'Computer Science and Business Systems',
+    skills: ['React','Node js','JavaScript','MongoDB','Postman'],
+    social: {
+      email: 'hemanth.m2021@sece.ac.in',
       github: '#',
       linkedin: '#'
     }
@@ -70,20 +70,40 @@ const teamMembers = [
 
 function TeamPage() {
   return (
-    <Box className="min-h-screen bg-gradient-to-b from-stone-900 to-stone-950 text-stone-50">
+    <Box sx={{ 
+      minHeight: '100vh', 
+      background: 'linear-gradient(to bottom, #1c1917, #0c0a09)', 
+      color: '#f5f5f4'
+    }}>
       {/* Header */}
-      <Box component="header" className="sticky top-0 z-50 w-full border-b border-stone-800 bg-stone-900/80 backdrop-blur-sm">
-        <Container maxWidth="lg" className="flex h-16 items-center justify-between px-4">
-          <Box className="flex items-center gap-2">
+      <Box component="header" sx={{ 
+        position: 'sticky', 
+        top: 0, 
+        zIndex: 50, 
+        width: '100%', 
+        borderBottom: '1px solid #292524',
+        background: 'rgba(28, 25, 23, 0.8)',
+        backdropFilter: 'blur(8px)'
+      }}>
+        <Container maxWidth="lg" sx={{ display: 'flex', height: 64, alignItems: 'center', justifyContent: 'space-between', px: 2 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Button
               variant="text"
-              className="p-2 hover:bg-stone-800 rounded-full text-stone-50"
+              sx={{ 
+                p: 1, 
+                minWidth: 'auto',
+                borderRadius: '50%',
+                color: '#f5f5f4',
+                '&:hover': { 
+                  background: 'rgba(68, 64, 60, 0.5)' 
+                }
+              }}
               component={Link}
               to="/"
             >
-              <ChevronLeft className="h-5 w征5" />
+              <ChevronLeft sx={{ height: 20, width: 20 }} />
             </Button>
-            <Typography variant="h6" className="font-bold text-stone-50">
+            <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#f5f5f4' }}>
               Our Team
             </Typography>
           </Box>
@@ -91,24 +111,45 @@ function TeamPage() {
       </Box>
 
       {/* Hero Section */}
-      <Box component="section" className="relative py-16 md:py-24 overflow-hidden">
-        <Box className="absolute inset-0 bg-gradient-to-b from-stone-900/80 to-stone-950/80" />
-        <Container maxWidth="lg" className="relative z-10 px-4">
+      <Box component="section" sx={{ position: 'relative', py: { xs: 8, md: 12 }, overflow: 'hidden' }}>
+        <Box sx={{ 
+          position: 'absolute', 
+          inset: 0, 
+          background: 'linear-gradient(to bottom, rgba(28, 25, 23, 0.8), rgba(12, 10, 9, 0.8))' 
+        }} />
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 10, px: 2 }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            style={{ textAlign: 'center', marginBottom: 64 }}
           >
             <Typography
               variant="h1"
-              className="text-4xl md:text-5xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500"
+              sx={{ 
+                fontSize: { xs: '2.5rem', md: '3.5rem' },
+                fontWeight: 800,
+                letterSpacing: '-0.02em',
+                background: 'linear-gradient(to right, #fcd34d, #f59e0b)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                color: 'transparent',
+                mb: 2
+              }}
             >
               Meet Our Team
             </Typography>
-            <Typography variant="h7" className="md:text-lg text-stone-300 max-w-2xl mx-auto text-center">
-  A dedicated group of students working on innovative solutions for landslide susceptibility mapping
-</Typography>
+            <Typography 
+              variant="subtitle1" 
+              sx={{ 
+                fontSize: { xs: '1rem', md: '1.125rem' },
+                color: '#d6d3d1',
+                maxWidth: '600px',
+                mx: 'auto'
+              }}
+            >
+              A dedicated group of students working on innovative solutions for landslide susceptibility mapping
+            </Typography>
           </motion.div>
 
           {/* Team Members Grid */}
@@ -119,69 +160,119 @@ function TeamPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="bg-stone-800 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                  style={{
+                    height: '100%',
+                    background: '#292524',
+                    borderRadius: 16,
+                    overflow: 'hidden',
+                    boxShadow: '0 10px 30px -15px rgba(0, 0, 0, 0.5)',
+                    transition: 'box-shadow 0.3s ease',
+                  }}
                 >
-                  <div className="relative h-48 overflow-hidden">
-                    <img
+                  <Box sx={{ position: 'relative', height: 220, overflow: 'hidden' }}>
+                    <Box 
+                      component="img"
                       src={member.image}
                       alt={member.name}
-                      className="w-full h-full object-cover"
+                      sx={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover',
+                        transition: 'transform 0.5s ease',
+                        '&:hover': {
+                          transform: 'scale(1.05)'
+                        }
+                      }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  </div>
+                    <Box sx={{ 
+                      position: 'absolute', 
+                      inset: 0, 
+                      background: 'linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 60%)' 
+                    }} />
+                  </Box>
 
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-amber-200 mb-1">{member.name}</h3>
-                    <div className="flex items-center gap-2 mb-3">
-                      <MapPin className="w-4 h-4 text-amber-400" />
-                      <p className="text-sm text-amber-400">{member.role}</p>
-                    </div>
+                  <Box sx={{ p: 3 }}>
+                    <Typography variant="h5" sx={{ fontWeight: 600, color: '#fcd34d', mb: 0.5 }}>
+                      {member.name}
+                    </Typography>
+                    
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
+                      <Briefcase sx={{ width: 16, height: 16, color: '#f59e0b' }} />
+                      <Typography variant="body2" sx={{ color: '#f59e0b' }}>
+                        {member.role}
+                      </Typography>
+                    </Box>
 
-                    <div className="flex items-center gap-2 mb-4">
-                      <GraduationCap className="w-4 h-4 text-amber-300" />
-                      <p className="text-sm text-amber-300">{member.department}</p>
-                    </div>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+                      <GraduationCap sx={{ width: 16, height: 16, color: '#fcd34d' }} />
+                      <Typography variant="body2" sx={{ color: '#fcd34d' }}>
+                        {member.department}
+                      </Typography>
+                    </Box>
 
-                    <div className="mb-6">
-                      <div className="flex flex-wrap gap-2">
+                    <Box sx={{ mb: 3 }}>
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                         {member.skills.map((skill) => (
-                          <span
+                          <Box
                             key={skill}
-                            className="px-2 py-1 text-xs rounded-full bg-amber-900/50 text-amber-200"
+                            sx={{ 
+                              px: 1.5, 
+                              py: 0.5, 
+                              fontSize: '0.75rem', 
+                              borderRadius: 10, 
+                              background: 'rgba(146, 64, 14, 0.3)', 
+                              color: '#fcd34d' 
+                            }}
                           >
                             {skill}
-                          </span>
+                          </Box>
                         ))}
-                      </div>
-                    </div>
+                      </Box>
+                    </Box>
 
-                    <div className="flex justify-center gap-4 pt-4 border-t border-stone-700">
+                    <Box sx={{ 
+                      display: 'flex', 
+                      justifyContent: 'center', 
+                      gap: 3, 
+                      pt: 2, 
+                      borderTop: '1px solid rgba(255, 255, 255, 0.1)' 
+                    }}>
                       <motion.a
-                        href={`mailto:${member.social.email}`}
-                        whileHover={{ scale: 1.1 }}
+                        href={`mailto:${member.social.email}?subject=Regarding Landslide Susceptibility Project`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.95 }}
-                        className="text-amber-400 hover:text-amber-200 transition-colors"
+                        style={{ color: '#f59e0b', transition: 'color 0.2s' }}
+                        aria-label={`Send email to ${member.name}`}
                       >
-                        <Mail className="w-5 h-5" />
+                        <Mail sx={{ width: 20, height: 20 }} />
                       </motion.a>
                       <motion.a
                         href={member.social.github}
-                        whileHover={{ scale: 1.1 }}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.95 }}
-                        className="text-amber-400 hover:text-amber-200 transition-colors"
+                        style={{ color: '#f59e0b', transition: 'color 0.2s' }}
+                        aria-label={`${member.name}'s GitHub profile`}
                       >
-                        <Github className="w-5 h-5" />
+                        <Github sx={{ width: 20, height: 20 }} />
                       </motion.a>
                       <motion.a
                         href={member.social.linkedin}
-                        whileHover={{ scale: 1.1 }}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.95 }}
-                        className="text-amber-400 hover:text-amber-200 transition-colors"
+                        style={{ color: '#f59e0b', transition: 'color 0.2s' }}
+                        aria-label={`${member.name}'s LinkedIn profile`}
                       >
-                        <Linkedin className="w-5 h-5" />
+                        <Linkedin sx={{ width: 20, height: 20 }} />
                       </motion.a>
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
                 </motion.div>
               </Grid>
             ))}
@@ -192,41 +283,94 @@ function TeamPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
+            style={{ 
+              marginTop: 64,
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: 24
+            }}
           >
-            <div className="p-6 bg-stone-800 rounded-xl shadow-lg">
-              <Code className="w-8 h-8 text-amber-400 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-amber-200 mb-2">Technical Excellence</h3>
-              <p className="text-stone-300">Combining cutting-edge technology with geological expertise</p>
-            </div>
-            <div className="p-6 bg-stone-800 rounded-xl shadow-lg">
-              <Brain className="w-8 h-8 text-amber-400 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-amber-200 mb-2">Innovation Focus</h3>
-              <p className="text-stone-300">Pushing boundaries in landslide prediction and analysis</p>
-            </div>
-            <div className="p-6 bg-stone-800 rounded-xl shadow-lg">
-              <Database className="w-8 h-8 text-amber-400 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-amber-200 mb-2">Data-Driven</h3>
-              <p className="text-stone-300">Leveraging advanced analytics for accurate predictions</p>
-            </div>
+            {[
+              { icon: Code, title: "Technical Excellence", desc: "Combining cutting-edge technology with geological expertise" },
+              { icon: Brain, title: "Innovation Focus", desc: "Pushing boundaries in landslide prediction and analysis" },
+              { icon: Database, title: "Data-Driven", desc: "Leveraging advanced analytics for accurate predictions" }
+            ].map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1 + (index * 0.2) }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
+                <Box sx={{ 
+                  p: 4, 
+                  background: '#292524', 
+                  borderRadius: 3, 
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
+                  textAlign: 'center',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center'
+                }}>
+                  <Box sx={{ 
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 60,
+                    height: 60,
+                    borderRadius: '50%',
+                    background: 'rgba(146, 64, 14, 0.2)',
+                    mb: 3
+                  }}>
+                    <item.icon sx={{ width: 28, height: 28, color: '#f59e0b' }} />
+                  </Box>
+                  <Typography variant="h6" sx={{ fontWeight: 600, color: '#fcd34d', mb: 1.5 }}>
+                    {item.title}
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: '#d6d3d1' }}>
+                    {item.desc}
+                  </Typography>
+                </Box>
+              </motion.div>
+            ))}
           </motion.div>
         </Container>
       </Box>
 
       {/* Footer */}
-      <Box component="footer" className="py-8 bg-stone-950 border-t border-stone-900">
-        <Container maxWidth="lg" className="px-4">
-          <Box className="flex flex-col md:flex-row items-center justify-center gap-4 text-center">
-            <Box className="flex items-center gap-4">
-              <a
+      <Box component="footer" sx={{ 
+        py: 4, 
+        background: '#0c0a09', 
+        borderTop: '1px solid #292524' 
+      }}>
+        <Container maxWidth="lg" sx={{ px: 2 }}>
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: { xs: 'column', md: 'row' }, 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            gap: 2, 
+            textAlign: 'center' 
+          }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <motion.a
                 href="mailto:info@landslide-project.org"
-                className="text-stone-400 hover:text-amber-400 transition-colors flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                style={{ 
+                  color: '#a8a29e', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: 1,
+                  textDecoration: 'none',
+                  transition: 'color 0.2s'
+                }}
               >
-                <Mail className="h-4 w-4" />
+                <Mail sx={{ height: 16, width: 16 }} />
                 <span>info@landslide-project.org</span>
-              </a>
+              </motion.a>
             </Box>
-            <Typography className="text-sm text-stone-500">
+            <Typography sx={{ fontSize: '0.875rem', color: '#78716c' }}>
               © {new Date().getFullYear()} Landslide Susceptibility Project. All rights reserved.
             </Typography>
           </Box>

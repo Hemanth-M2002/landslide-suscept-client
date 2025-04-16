@@ -32,6 +32,7 @@ const pageVariants = {
 export default function Research() {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [showAllReferences, setShowAllReferences] = useState(false);
+  const [activeTab, setActiveTab] = useState('references'); // New state for tab navigation
 
   // Define references array
   const references = [
@@ -130,16 +131,32 @@ export default function Research() {
         exit="exit"
         className="min-h-screen bg-[#1a1a1a]"
       >
-        {/* Hero Section */}
+        {/* Hero Section - Refined with parallax effect */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="relative h-[400px] bg-cover bg-center bg-fixed"
+          className="relative h-[500px] bg-cover bg-center overflow-hidden"
           style={{
             backgroundImage: 'url("https://images.unsplash.com/photo-1590739293831-5f16b7c8121c?auto=format&fit=crop&q=80&w=1920")',
           }}
         >
+          <motion.div 
+            initial={{ y: 0 }}
+            animate={{ y: -20 }}
+            transition={{ 
+              repeat: Infinity, 
+              repeatType: "reverse", 
+              duration: 20,
+              ease: "linear"
+            }}
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: 'url("https://images.unsplash.com/photo-1590739293831-5f16b7c8121c?auto=format&fit=crop&q=80&w=1920")',
+              filter: 'blur(2px)',
+              transform: 'scale(1.1)'
+            }}
+          />
           <div className="absolute inset-0 bg-black/70">
             <div className="container mx-auto px-4 h-full flex items-center">
               <motion.div 
@@ -150,149 +167,302 @@ export default function Research() {
               >
                 <Button
                   variant="text"
-                  className="p-2 hover:bg-stone-800 rounded-full text-stone-50 mb-4"
+                  className="p-2 hover:bg-stone-800/50 rounded-full text-stone-50 mb-4 backdrop-blur-sm"
                   component={Link}
                   to="/"
                 >
                   <ChevronLeft className="h-5 w-5" />
+                  <span className="ml-1">Home</span>
                 </Button>
-                <h1 className="text-5xl font-bold mb-4 text-amber-400">Landslide Susceptibility Research</h1>
-                <p className="text-xl mb-6 text-amber-100">Comprehensive Analysis of the Nilgiri District</p>
-                <a 
+                <h1 className="text-5xl font-bold mb-4 text-amber-400 drop-shadow-lg">Landslide Susceptibility Research</h1>
+                <p className="text-xl mb-6 text-amber-100 drop-shadow-md">Comprehensive Analysis of the Nilgiri District</p>
+                <motion.a 
                   href="#tools" 
-                  className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 transition-colors px-6 py-3 rounded-lg font-semibold"
+                  className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 transition-colors px-6 py-3 rounded-lg font-semibold shadow-lg"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Explore Research
                   <ChevronRight className="h-4 w-4" />
-                </a>
+                </motion.a>
               </motion.div>
             </div>
           </div>
+          
+          {/* Decorative elements */}
+          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#1a1a1a] to-transparent" />
         </motion.div>
 
-        {/* Tools Section */}
-        <div id="tools" className="container mx-auto px-4 py-16">
-          <motion.div 
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="bg-[#242424] rounded-xl shadow-xl p-8 mb-12 border border-amber-900/20"
-          >
-            <h2 className="text-3xl font-bold mb-8 flex items-center gap-2 text-amber-400">
-              <Database className="h-8 w-8 text-amber-500" />
-              Tools & Resources Used
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <motion.div 
-                whileHover={{ scale: 1.02 }}
-                className="p-6 border border-amber-900/30 rounded-xl hover:border-amber-500/50 transition-colors bg-[#1a1a1a]"
+        {/* Navigation Tabs */}
+        <div className="sticky top-0 z-30 bg-[#1a1a1a]/90 backdrop-blur-md border-b border-amber-900/20 shadow-md">
+          <div className="container mx-auto px-4">
+            <div className="flex overflow-x-auto hide-scrollbar py-4 gap-4">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setActiveTab('tools')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 whitespace-nowrap ${
+                  activeTab === 'tools' ? 'bg-amber-500 text-white' : 'bg-[#242424] text-amber-300 hover:bg-[#2a2a2a]'
+                }`}
               >
-                <h3 className="font-semibold text-xl mb-3 flex items-center gap-2 text-amber-300">
-                  <img 
-                    src="https://upload.wikimedia.org/wikipedia/commons/d/df/ArcGIS_logo.png" 
-                    alt="ArcGIS Logo" 
-                    className="w-8 h-8 object-contain bg-white p-1 rounded"
-                  />
-                  ArcGIS Pro
-                </h3>
-                <p className="text-amber-100/80 mb-4">
-                  Utilized ArcGIS Pro for advanced spatial analysis, mapping, and visualization of landslide susceptibility factors in the Nilgiri district.
-                </p>
-                <a 
-                  href="https://www.esri.com/en-us/arcgis/products/arcgis-pro" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-amber-500 hover:text-amber-400 font-medium flex items-center gap-1"
-                >
-                  Learn more about ArcGIS Pro
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-              </motion.div>
-              <motion.div 
-                whileHover={{ scale: 1.02 }}
-                className="p-6 border border-amber-900/30 rounded-xl hover:border-amber-500/50 transition-colors bg-[#1a1a1a]"
+                <Database className="h-4 w-4" />
+                Tools & Resources
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setActiveTab('references')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 whitespace-nowrap ${
+                  activeTab === 'references' ? 'bg-amber-500 text-white' : 'bg-[#242424] text-amber-300 hover:bg-[#2a2a2a]'
+                }`}
               >
-                <h3 className="font-semibold text-xl mb-3 text-amber-300">Bushok Research Platform</h3>
-                <p className="text-amber-100/80 mb-4">
-                  Integrated comprehensive geological data and resources from the Bushok platform for enhanced analysis and validation of research findings.
-                </p>
-                <a 
-                  href="#" 
-                  className="text-amber-500 hover:text-amber-400 font-medium flex items-center gap-1"
-                >
-                  Access Bushok Platform
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* References Section */}
-          <motion.div 
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="bg-[#242424] rounded-xl shadow-xl p-8 border border-amber-900/20"
-          >
-            <h2 className="text-3xl font-bold mb-8 flex items-center gap-2 text-amber-400">
-              <BookOpen className="h-8 w-8 text-amber-500" />
-              References
-            </h2>
-            <div className="space-y-4">
-              <AnimatePresence>
-                {referencesToShow.map((ref, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
-                    whileHover={{ scale: 1.01 }}
-                    className="p-5 bg-[#1a1a1a] rounded-lg hover:bg-[#2a2a2a] transition-all border border-amber-900/20"
-                  >
-                    <div className="flex justify-between items-start gap-4">
-                      <p className="text-amber-100/90">{ref.citation}</p>
-                      <div className="flex gap-2">
-                        {ref.url && (
-                          <button 
-                            onClick={() => window.open(ref.url, '_blank')}
-                            className="text-amber-500 hover:text-amber-400 transition-colors"
-                            title="View online"
-                          >
-                            <ExternalLink className="h-5 w-5" />
-                          </button>
-                        )}
-                        <button 
-                          onClick={() => console.log('Downloading:', ref.citation)}
-                          className="text-amber-500 hover:text-amber-400 transition-colors"
-                          title="Download"
-                        >
-                          <Download className="h-5 w-5" />
-                        </button>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-
-              <motion.button 
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setShowAllReferences(!showAllReferences)}
-                className="mt-6 w-full bg-[#1a1a1a] hover:bg-[#2a2a2a] text-amber-500 font-semibold py-4 rounded-lg transition-colors flex items-center justify-center gap-2 border border-amber-900/20"
+                <BookOpen className="h-4 w-4" />
+                References
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setActiveTab('methodology')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 whitespace-nowrap ${
+                  activeTab === 'methodology' ? 'bg-amber-500 text-white' : 'bg-[#242424] text-amber-300 hover:bg-[#2a2a2a]'
+                }`}
               >
-                <span>{showAllReferences ? 'Show Less References' : 'View All References'}</span>
-                <ChevronRight 
-                  className={`h-4 w-4 transition-transform ${showAllReferences ? 'rotate-90' : ''}`}
-                />
+                <Map className="h-4 w-4" />
+                Methodology
               </motion.button>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Footer */}
+        {/* Main Content Area */}
+        <div className="container mx-auto px-4 py-12">
+          <AnimatePresence mode="wait">
+            {activeTab === 'tools' && (
+              <motion.div 
+                key="tools-section"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                id="tools" 
+                className="mb-12"
+              >
+                <div className="bg-[#242424] rounded-xl shadow-xl p-8 border border-amber-900/20">
+                  <h2 className="text-3xl font-bold mb-8 flex items-center gap-2 text-amber-400">
+                    <Database className="h-8 w-8 text-amber-500" />
+                    Tools & Resources Used
+                  </h2>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <motion.div 
+                      whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(251, 191, 36, 0.1)" }}
+                      className="p-6 border border-amber-900/30 rounded-xl hover:border-amber-500/50 transition-all bg-[#1a1a1a] relative overflow-hidden group"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <h3 className="font-semibold text-xl mb-3 flex items-center gap-2 text-amber-300">
+                        <img 
+                          src="https://upload.wikimedia.org/wikipedia/commons/d/df/ArcGIS_logo.png" 
+                          alt="ArcGIS Logo" 
+                          className="w-8 h-8 object-contain bg-white p-1 rounded"
+                        />
+                        ArcGIS Pro
+                      </h3>
+                      <p className="text-amber-100/80 mb-4">
+                        Utilized ArcGIS Pro for advanced spatial analysis, mapping, and visualization of landslide susceptibility factors in the Nilgiri district.
+                      </p>
+                      <motion.a 
+                        href="https://www.esri.com/en-us/arcgis/products/arcgis-pro" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-amber-500 hover:text-amber-400 font-medium flex items-center gap-1 relative z-10"
+                        whileHover={{ x: 5 }}
+                      >
+                        Learn more about ArcGIS Pro
+                        <ExternalLink className="h-4 w-4" />
+                      </motion.a>
+                    </motion.div>
+                    
+                    <motion.div 
+                      whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(251, 191, 36, 0.1)" }}
+                      className="p-6 border border-amber-900/30 rounded-xl hover:border-amber-500/50 transition-all bg-[#1a1a1a] relative overflow-hidden group"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <h3 className="font-semibold text-xl mb-3 flex items-center gap-2 text-amber-300">
+                        <div className="w-8 h-8 flex items-center justify-center bg-amber-500 rounded">
+                          <span className="text-black font-bold text-xs">BR</span>
+                        </div>
+                        Bushok Research Platform
+                      </h3>
+                      <p className="text-amber-100/80 mb-4">
+                        Integrated comprehensive geological data and resources from the Bushok platform for enhanced analysis and validation of research findings.
+                      </p>
+                      <motion.a 
+                        href="#" 
+                        className="text-amber-500 hover:text-amber-400 font-medium flex items-center gap-1 relative z-10"
+                        whileHover={{ x: 5 }}
+                      >
+                        Access Bushok Platform
+                        <ExternalLink className="h-4 w-4" />
+                      </motion.a>
+                    </motion.div>
+                    
+                    <motion.div 
+                      whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(251, 191, 36, 0.1)" }}
+                      className="p-6 border border-amber-900/30 rounded-xl hover:border-amber-500/50 transition-all bg-[#1a1a1a] relative overflow-hidden group"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <h3 className="font-semibold text-xl mb-3 flex items-center gap-2 text-amber-300">
+                        <img 
+                          src="https://www.tensorflow.org/images/tf_logo_social.png" 
+                          alt="TensorFlow Logo" 
+                          className="w-8 h-8 object-contain rounded"
+                        />
+                        TensorFlow
+                      </h3>
+                      <p className="text-amber-100/80 mb-4">
+                        Leveraged TensorFlow for implementing deep learning models to analyze and predict landslide susceptibility patterns.
+                      </p>
+                      <motion.a 
+                        href="https://www.tensorflow.org/" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-amber-500 hover:text-amber-400 font-medium flex items-center gap-1 relative z-10"
+                        whileHover={{ x: 5 }}
+                      >
+                        Explore TensorFlow
+                        <ExternalLink className="h-4 w-4" />
+                      </motion.a>
+                    </motion.div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {activeTab === 'references' && (
+              <motion.div 
+                key="references-section"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="mb-12"
+              >
+                <div className="bg-[#242424] rounded-xl shadow-xl p-8 border border-amber-900/20">
+                  <h2 className="text-3xl font-bold mb-8 flex items-center gap-2 text-amber-400">
+                    <BookOpen className="h-8 w-8 text-amber-500" />
+                    References
+                  </h2>
+                  <div className="space-y-4">
+                    <AnimatePresence>
+                      {referencesToShow.map((ref, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.3, delay: index * 0.05 }}
+                          whileHover={{ scale: 1.01, backgroundColor: "#2a2a2a" }}
+                          className="p-5 bg-[#1a1a1a] rounded-lg transition-all border border-amber-900/20 group"
+                        >
+                          <div className="flex justify-between items-start gap-4">
+                            <p className="text-amber-100/90 group-hover:text-amber-100">{ref.citation}</p>
+                            <div className="flex gap-2">
+                              {ref.url && (
+                                <motion.button 
+                                  whileHover={{ scale: 1.2, rotate: 5 }}
+                                  whileTap={{ scale: 0.9 }}
+                                  onClick={() => window.open(ref.url, '_blank')}
+                                  className="text-amber-500 hover:text-amber-400 transition-colors p-1"
+                                  title="View online"
+                                >
+                                  <ExternalLink className="h-5 w-5" />
+                                </motion.button>
+                              )}
+                              <motion.button 
+                                whileHover={{ scale: 1.2, rotate: -5 }}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => console.log('Downloading:', ref.citation)}
+                                className="text-amber-500 hover:text-amber-400 transition-colors p-1"
+                                title="Download"
+                              >
+                                <Download className="h-5 w-5" />
+                              </motion.button>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
+
+                    <motion.button 
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setShowAllReferences(!showAllReferences)}
+                      className="mt-6 w-full bg-[#1a1a1a] hover:bg-[#2a2a2a] text-amber-500 font-semibold py-4 rounded-lg transition-colors flex items-center justify-center gap-2 border border-amber-900/20"
+                    >
+                      <span>{showAllReferences ? 'Show Less References' : 'View All References'}</span>
+                      <ChevronRight 
+                        className={`h-4 w-4 transition-transform ${showAllReferences ? 'rotate-90' : ''}`}
+                      />
+                    </motion.button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {activeTab === 'methodology' && (
+              <motion.div 
+                key="methodology-section"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="mb-12"
+              >
+                <div className="bg-[#242424] rounded-xl shadow-xl p-8 border border-amber-900/20">
+                  <h2 className="text-3xl font-bold mb-8 flex items-center gap-2 text-amber-400">
+                    <Map className="h-8 w-8 text-amber-500" />
+                    Research Methodology
+                  </h2>
+                  
+                  <div className="space-y-8">
+                    <div className="relative pl-8 border-l-2 border-amber-500/30">
+                      <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-amber-500"></div>
+                      <h3 className="text-xl font-semibold text-amber-300 mb-2">Data Collection</h3>
+                      <p className="text-amber-100/80 mb-4">
+                        Comprehensive geological, topographical, and historical landslide data was collected from the Nilgiri district using remote sensing techniques and field surveys.
+                      </p>
+                    </div>
+                    
+                    <div className="relative pl-8 border-l-2 border-amber-500/30">
+                      <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-amber-500"></div>
+                      <h3 className="text-xl font-semibold text-amber-300 mb-2">Feature Engineering</h3>
+                      <p className="text-amber-100/80 mb-4">
+                        Key landslide susceptibility factors were identified and processed, including slope angle, aspect, elevation, lithology, land use, rainfall patterns, and distance to drainage networks.
+                      </p>
+                    </div>
+                    
+                    <div className="relative pl-8 border-l-2 border-amber-500/30">
+                      <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-amber-500"></div>
+                      <h3 className="text-xl font-semibold text-amber-300 mb-2">Model Development</h3>
+                      <p className="text-amber-100/80 mb-4">
+                        A hybrid deep learning approach combining Convolutional Neural Networks (CNNs) and traditional machine learning algorithms was implemented to analyze spatial patterns and predict landslide susceptibility.
+                      </p>
+                    </div>
+                    
+                    <div className="relative pl-8">
+                      <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-amber-500"></div>
+                      <h3 className="text-xl font-semibold text-amber-300 mb-2">Validation & Analysis</h3>
+                      <p className="text-amber-100/80 mb-4">
+                        The model was validated using historical landslide data and statistical measures including ROC curves, AUC values, and confusion matrices to ensure accuracy and reliability.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Footer - Refined with better spacing and hover effects */}
         <footer className="bg-[#141414] text-white py-12 mt-16 border-t border-amber-900/20">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -304,16 +474,34 @@ export default function Research() {
                 </div>
               </div>
               <div className="flex gap-6">
-                <a href="#" className="text-amber-200/70 hover:text-amber-400 transition-colors">About</a>
-                <a href="#" className="text-amber-200/70 hover:text-amber-400 transition-colors">Contact</a>
-                <a href="#" className="text-amber-200/70 hover:text-amber-400 transition-colors">Resources</a>
+                <motion.a 
+                  href="#" 
+                  className="text-amber-200/70 hover:text-amber-400 transition-colors"
+                  whileHover={{ y: -2 }}
+                >
+                  About
+                </motion.a>
+                <motion.a 
+                  href="#" 
+                  className="text-amber-200/70 hover:text-amber-400 transition-colors"
+                  whileHover={{ y: -2 }}
+                >
+                  Contact
+                </motion.a>
+                <motion.a 
+                  href="#" 
+                  className="text-amber-200/70 hover:text-amber-400 transition-colors"
+                  whileHover={{ y: -2 }}
+                >
+                  Resources
+                </motion.a>
               </div>
               <p className="text-amber-200/50">© 2024 Research Project</p>
             </div>
           </div>
         </footer>
 
-        {/* Back to Top Button */}
+        {/* Back to Top Button - Enhanced with smoother animation */}
         <AnimatePresence>
           {showBackToTop && (
             <motion.button
@@ -321,14 +509,71 @@ export default function Research() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
               onClick={scrollToTop}
-              className="fixed bottom-8 right-8 bg-amber-500 hover:bg-amber-600 text-white p-3 rounded-full shadow-lg transition-colors"
-              whileHover={{ scale: 1.1 }}
+              className="fixed bottom-8 right-8 bg-amber-500 hover:bg-amber-600 text-white p-3 rounded-full shadow-lg transition-colors z-50 flex items-center justify-center"
+              whileHover={{ scale: 1.1, boxShadow: "0 0 15px rgba(251, 191, 36, 0.5)" }}
               whileTap={{ scale: 0.9 }}
+              aria-label="Back to top"
             >
               <ArrowUp className="h-6 w-6" />
             </motion.button>
           )}
         </AnimatePresence>
+
+        {/* Always visible floating action button for navigation */}
+        <div className="fixed bottom-8 left-8 z-50">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1 }}
+            className="flex flex-col gap-3"
+          >
+            <motion.button
+              whileHover={{ scale: 1.1, boxShadow: "0 0 15px rgba(251, 191, 36, 0.5)" }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setActiveTab('tools')}
+              className={`p-3 rounded-full shadow-lg transition-colors ${
+                activeTab === 'tools' ? 'bg-amber-500 text-white' : 'bg-[#242424] text-amber-300 hover:bg-amber-500/80 hover:text-white'
+              }`}
+              aria-label="Tools & Resources"
+            >
+              <Database className="h-6 w-6" />
+            </motion.button>
+            
+            <motion.button
+              whileHover={{ scale: 1.1, boxShadow: "0 0 15px rgba(251, 191, 36, 0.5)" }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setActiveTab('references')}
+              className={`p-3 rounded-full shadow-lg transition-colors ${
+                activeTab === 'references' ? 'bg-amber-500 text-white' : 'bg-[#242424] text-amber-300 hover:bg-amber-500/80 hover:text-white'
+              }`}
+              aria-label="References"
+            >
+              <BookOpen className="h-6 w-6" />
+            </motion.button>
+            
+            <motion.button
+              whileHover={{ scale: 1.1, boxShadow: "0 0 15px rgba(251, 191, 36, 0.5)" }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setActiveTab('methodology')}
+              className={`p-3 rounded-full shadow-lg transition-colors ${
+                activeTab === 'methodology' ? 'bg-amber-500 text-white' : 'bg-[#242424] text-amber-300 hover:bg-amber-500/80 hover:text-white'
+              }`}
+              aria-label="Methodology"
+            >
+              <Map className="h-6 w-6" />
+            </motion.button>
+          </motion.div>
+        </div>
+        {/* Add custom styles for hiding scrollbars */}
+        <style jsx>{`
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+          .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+        `}</style>
       </motion.div>
     </AnimatePresence>
   );
