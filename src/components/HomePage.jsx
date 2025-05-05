@@ -4,10 +4,12 @@ import { ChevronRight, Info, Layers, MapPin, Menu } from "lucide-react";
 import EarthVisualization from "./EarthVisualization";
 import FeatureCard from "./FeatureCard";
 
+
 function HomePage() {
   const navigate = useNavigate();
   const [isEarthLoaded, setIsEarthLoaded] = useState(false);
   const [stars, setStars] = useState([]);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);  // Add this line
 
   useEffect(() => {
     const generateStars = () => {
@@ -66,7 +68,7 @@ function HomePage() {
               Features
             </Link>
             <Link
-              to="/soon"
+              to="/about"
               className="text-sm font-medium hover:text-amber-400 transition-colors"
             >
               About
@@ -84,9 +86,45 @@ function HomePage() {
               Contact
             </Link>
           </nav>
-          <button className="md:hidden p-2 rounded hover:bg-stone-800">
-            <Menu className="h-5 w-5" />
-          </button>
+          {/* Add mobile menu */}
+          <div className="md:hidden">
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+              className="p-2 rounded hover:bg-stone-800"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+            {mobileMenuOpen && (
+              <div className="absolute top-16 left-0 right-0 bg-stone-900 border-b border-stone-800 p-4">
+                <div className="flex flex-col gap-4">
+                  <Link
+                    to="/feature-page"
+                    className="text-sm font-medium hover:text-amber-400 transition-colors"
+                  >
+                    Features
+                  </Link>
+                  <Link
+                    to="/about"
+                    className="text-sm font-medium hover:text-amber-400 transition-colors"
+                  >
+                    About
+                  </Link>
+                  <Link
+                    to="/research"
+                    className="text-sm font-medium hover:text-amber-400 transition-colors"
+                  >
+                    Research
+                  </Link>
+                  <Link
+                    to="/team"
+                    className="text-sm font-medium hover:text-amber-400 transition-colors"
+                  >
+                    Contact
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
@@ -113,15 +151,29 @@ function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
             <button
               onClick={handleNavigate}
-              className={`bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded flex items-center ${
-                !isEarthLoaded ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+              className={`
+                bg-amber-600 
+                text-white 
+                px-6 
+                py-2 
+                rounded 
+                flex 
+                items-center 
+                transition-all 
+                duration-300
+                ${isEarthLoaded 
+                  ? "hover:bg-amber-700 hover:scale-105 cursor-pointer" 
+                  : "opacity-50 cursor-not-allowed hover:bg-amber-600"}
+              `}
               disabled={!isEarthLoaded}
             >
               Explore Map
               <ChevronRight className="ml-2 h-4 w-4" />
             </button>
-            <button className="border border-stone-700 text-stone-200 hover:bg-stone-800 px-6 py-2 rounded">
+            <button 
+              onClick={() => navigate('/learn-more')} 
+              className="border border-stone-700 text-stone-200 hover:bg-stone-800 px-6 py-2 rounded transition-all duration-300 hover:scale-105"
+            >
               Learn More
             </button>
           </div>
@@ -193,41 +245,48 @@ function HomePage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               <FeatureCard
-                icon={<Layers className="h-10 w-10 text-amber-500" />}
+                icon={<Layers className="h-10 w-10 text-amber-500 group-hover:text-amber-400 transition-colors duration-300" />}
                 title="Geological Mapping"
                 description="Multi-layered geological data analysis with advanced terrain modeling and soil composition assessment."
-                className="hover:bg-stone-800 hover:shadow-lg hover:shadow-amber-500/50 cursor-pointer transition-transform duration-300 transform hover:scale-105"
+                className="group bg-stone-900/60 border border-stone-800 p-4 sm:p-6 rounded-xl hover:bg-stone-800/80 hover:shadow-xl hover:shadow-amber-500/20 cursor-pointer transition-all duration-300 
+                                 transform hover:-translate-y-1 hover:scale-[1.02] relative overflow-hidden"
+                onClick={() => navigate('/geological-mapping')}
               />
               <FeatureCard
-                icon={<MapPin className="h-10 w-10 text-amber-500" />}
+                icon={<MapPin className="h-10 w-10 text-amber-500 group-hover:text-amber-400 transition-colors duration-300" />}
                 title="Risk Assessment"
                 description="Identify high-risk zones with precision using our proprietary risk assessment algorithms."
-                className="hover:bg-stone-800 hover:shadow-lg hover:shadow-amber-500/50 cursor-pointer transition-transform duration-300 transform hover:scale-105"
+                className="group bg-stone-900/60 border border-stone-800 p-6 rounded-xl hover:bg-stone-800/80 hover:shadow-xl hover:shadow-amber-500/20 cursor-pointer transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.02] relative overflow-hidden"
+                onClick={() => navigate('/risk-assessment')}
               />
               <FeatureCard
-                icon={<Info className="h-10 w-10 text-amber-500" />}
+                icon={<Info className="h-10 w-10 text-amber-500 group-hover:text-amber-400 transition-colors duration-300" />}
                 title="Real-time Monitoring"
                 description="Continuous monitoring of soil conditions, rainfall, and ground movement with early warning systems."
-                className="hover:bg-stone-800 hover:shadow-lg hover:shadow-amber-500/50 cursor-pointer transition-transform duration-300 transform hover:scale-105"
+                className="group bg-stone-900/60 border border-stone-800 p-6 rounded-xl hover:bg-stone-800/80 hover:shadow-xl hover:shadow-amber-500/20 cursor-pointer transition-all duration-300 transform hover:-translate-y-1 hover:scale-[1.02] relative overflow-hidden"
+                onClick={() => navigate('/monitoring')}
               />
             </div>
           </div>
         </section>
 
         {/* Call to Action */}
-        <section className="relative z-10 py-16 bg-gradient-to-r from-amber-900/30 to-stone-900/30 border-y border-amber-900/20">
+        <section className="relative z-10 py-8 sm:py-16 bg-gradient-to-r from-amber-900/30 to-stone-900/30 border-y border-amber-900/20">
           <div className="container max-w-7xl mx-auto px-4">
             <div className="bg-stone-900/60 border border-stone-800 rounded backdrop-blur-sm">
-              <div className="p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-                <div className="space-y-2 text-center md:text-left">
-                  <h3 className="text-2xl font-bold text-amber-400">Ready to explore landslide data?</h3>
-                  <p className="text-stone-300">
+              <div className="p-4 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+                <div className="space-y-2 text-center md:text-left w-full md:w-auto">
+                  <h3 className="text-xl sm:text-2xl font-bold text-amber-400">Ready to explore landslide data?</h3>
+                  <p className="text-sm sm:text-base text-stone-300">
                     Access our interactive maps and analysis tools to understand landslide risks in your area.
                   </p>
                 </div>
-                <button className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded">
+                <button className="w-full md:w-auto bg-amber-600 hover:bg-amber-700 text-white px-6 sm:px-8 py-2 sm:py-3 
+                                   rounded transition-all duration-300 hover:scale-105"
+                  onClick={() => navigate('/dashboard')}
+                >
                   Access Dashboard
                 </button>
               </div>
@@ -236,13 +295,13 @@ function HomePage() {
         </section>
 
         {/* Footer */}
-        <footer className="relative z-10 py-8 bg-stone-950/80 backdrop-blur-sm border-t border-stone-900">
-          <div className="container flex flex-col md:flex-row justify-between items-center gap-4 max-w-7xl mx-auto px-4">
+        <footer className="relative z-10 py-6 sm:py-8 bg-stone-950/80 backdrop-blur-sm border-t border-stone-900">
+          <div className="container flex flex-col sm:flex-row justify-between items-center gap-4 max-w-7xl mx-auto px-4">
             <div className="flex items-center gap-2 font-bold text-stone-50">
               <Layers className="h-5 w-5 text-amber-500" />
-              <span>Landslide Susceptibility</span>
+              <span className="text-sm sm:text-base">Landslide Susceptibility</span>
             </div>
-            <p className="text-sm text-stone-500">
+            <p className="text-xs sm:text-sm text-stone-500 text-center sm:text-left">
               © {new Date().getFullYear()} Landslide Susceptibility Project. All rights reserved.
             </p>
           </div>

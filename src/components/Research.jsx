@@ -131,12 +131,12 @@ export default function Research() {
         exit="exit"
         className="min-h-screen bg-[#1a1a1a]"
       >
-        {/* Hero Section - Refined with parallax effect */}
+        {/* Hero Section - Made Responsive */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="relative h-[500px] bg-cover bg-center overflow-hidden"
+          className="relative h-[300px] sm:h-[400px] md:h-[500px] bg-cover bg-center overflow-hidden"
           style={{
             backgroundImage: 'url("https://images.unsplash.com/photo-1590739293831-5f16b7c8121c?auto=format&fit=crop&q=80&w=1920")',
           }}
@@ -158,12 +158,12 @@ export default function Research() {
             }}
           />
           <div className="absolute inset-0 bg-black/70">
-            <div className="container mx-auto px-4 h-full flex items-center">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
               <motion.div 
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="text-white max-w-2xl"
+                className="text-white max-w-2xl w-full"
               >
                 <Button
                   variant="text"
@@ -171,71 +171,69 @@ export default function Research() {
                   component={Link}
                   to="/"
                 >
-                  <ChevronLeft className="h-5 w-5" />
-                  <span className="ml-1">Home</span>
+                  <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+                  <span className="ml-1 text-sm sm:text-base">Home</span>
                 </Button>
-                <h1 className="text-5xl font-bold mb-4 text-amber-400 drop-shadow-lg">Landslide Susceptibility Research</h1>
-                <p className="text-xl mb-6 text-amber-100 drop-shadow-md">Comprehensive Analysis of the Nilgiri District</p>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-4 text-amber-400 drop-shadow-lg">Landslide Susceptibility Research</h1>
+                <p className="text-lg sm:text-xl mb-4 sm:mb-6 text-amber-100 drop-shadow-md">Comprehensive Analysis of the Nilgiri District</p>
                 <motion.a 
                   href="#tools" 
-                  className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 transition-colors px-6 py-3 rounded-lg font-semibold shadow-lg"
+                  className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 transition-colors px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold shadow-lg text-sm sm:text-base"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Explore Research
-                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
                 </motion.a>
               </motion.div>
             </div>
           </div>
-          
-          {/* Decorative elements */}
           <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#1a1a1a] to-transparent" />
         </motion.div>
 
-        {/* Navigation Tabs */}
+        {/* Navigation Tabs - Made Responsive */}
         <div className="sticky top-0 z-30 bg-[#1a1a1a]/90 backdrop-blur-md border-b border-amber-900/20 shadow-md">
-          <div className="container mx-auto px-4">
-            <div className="flex overflow-x-auto hide-scrollbar py-4 gap-4">
+          <div className="container mx-auto px-2 sm:px-4">
+            <div className="flex overflow-x-auto hide-scrollbar py-2 sm:py-4 gap-2 sm:gap-4">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveTab('tools')}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 whitespace-nowrap ${
+                className={`px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-1 sm:gap-2 whitespace-nowrap text-sm sm:text-base ${
                   activeTab === 'tools' ? 'bg-amber-500 text-white' : 'bg-[#242424] text-amber-300 hover:bg-[#2a2a2a]'
                 }`}
               >
-                <Database className="h-4 w-4" />
+                <Database className="h-3 w-3 sm:h-4 sm:w-4" />
                 Tools & Resources
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveTab('references')}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 whitespace-nowrap ${
+                className={`px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-1 sm:gap-2 whitespace-nowrap text-sm sm:text-base ${
                   activeTab === 'references' ? 'bg-amber-500 text-white' : 'bg-[#242424] text-amber-300 hover:bg-[#2a2a2a]'
                 }`}
               >
-                <BookOpen className="h-4 w-4" />
+                <BookOpen className="h-3 w-3 sm:h-4 sm:w-4" />
                 References
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveTab('methodology')}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 whitespace-nowrap ${
+                className={`px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-1 sm:gap-2 whitespace-nowrap text-sm sm:text-base ${
                   activeTab === 'methodology' ? 'bg-amber-500 text-white' : 'bg-[#242424] text-amber-300 hover:bg-[#2a2a2a]'
                 }`}
               >
-                <Map className="h-4 w-4" />
+                <Map className="h-3 w-3 sm:h-4 sm:w-4" />
                 Methodology
               </motion.button>
             </div>
           </div>
         </div>
 
-        {/* Main Content Area */}
-        <div className="container mx-auto px-4 py-12">
+        {/* Main Content Area - Made Responsive */}
+        <div className="container mx-auto px-4 py-6 sm:py-12">
           <AnimatePresence mode="wait">
             {activeTab === 'tools' && (
               <motion.div 
@@ -245,14 +243,14 @@ export default function Research() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
                 id="tools" 
-                className="mb-12"
+                className="mb-6 sm:mb-12"
               >
-                <div className="bg-[#242424] rounded-xl shadow-xl p-8 border border-amber-900/20">
-                  <h2 className="text-3xl font-bold mb-8 flex items-center gap-2 text-amber-400">
-                    <Database className="h-8 w-8 text-amber-500" />
+                <div className="bg-[#242424] rounded-xl shadow-xl p-4 sm:p-8 border border-amber-900/20">
+                  <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-8 flex items-center gap-2 text-amber-400">
+                    <Database className="h-6 w-6 sm:h-8 sm:w-8 text-amber-500" />
                     Tools & Resources Used
                   </h2>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                     <motion.div 
                       whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(251, 191, 36, 0.1)" }}
                       className="p-6 border border-amber-900/30 rounded-xl hover:border-amber-500/50 transition-all bg-[#1a1a1a] relative overflow-hidden group"
@@ -344,14 +342,14 @@ export default function Research() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
-                className="mb-12"
+                className="mb-6 sm:mb-12"
               >
-                <div className="bg-[#242424] rounded-xl shadow-xl p-8 border border-amber-900/20">
-                  <h2 className="text-3xl font-bold mb-8 flex items-center gap-2 text-amber-400">
-                    <BookOpen className="h-8 w-8 text-amber-500" />
+                <div className="bg-[#242424] rounded-xl shadow-xl p-4 sm:p-8 border border-amber-900/20">
+                  <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-8 flex items-center gap-2 text-amber-400">
+                    <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-amber-500" />
                     References
                   </h2>
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     <AnimatePresence>
                       {referencesToShow.map((ref, index) => (
                         <motion.div
